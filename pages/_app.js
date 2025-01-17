@@ -29,12 +29,6 @@ function MyApp({ Component, pageProps }) {
       {/* Main Content */}
       <main
         className="container mx-auto py-6"
-        style={{
-          backgroundImage: 'url(/images/bgUtama.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
       >
         <Component {...pageProps} />
       </main>

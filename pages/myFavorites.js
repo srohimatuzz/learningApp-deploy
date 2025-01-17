@@ -38,13 +38,13 @@ const MyFavorites = () => {
               >
                 X
               </button>
-              <div className="relative">
+              {/* <div className="relative">
                 <img
                   src={course.imageUrl}
                   alt={course.title}
                   className="w-full h-48 object-cover transition-all duration-500 ease-in-out"
                 />
-              </div>
+              </div> */}
               <div className="p-6">
                 <h3 className="text-2xl font-semibold text-black mb-2">{course.title}</h3>
                 <p className="text-gray-600 text-sm">{course.description}</p>

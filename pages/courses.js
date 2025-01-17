@@ -220,12 +220,6 @@ const Courses = () => {
     setSelectedCourse(null);
   };
 
-  const handleRemoveFromFavorites = (courseId) => {
-    const updatedFavorites = favorites.filter(course => course.id !== courseId);
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  };
-
   return (
 
     <div className="min-h-screen flex flex-col items-center py-10">
@@ -340,6 +334,3 @@ const Courses = () => {
 };
 
 export default Courses;
-
-
-

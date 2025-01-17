@@ -21,7 +21,8 @@ body {
 }
 
 .background-image {
-  background-image: url('/images/bgUtama.jpg');
+  min-height: 100vh;
+  background: linear-gradient(to right, #38bdf8, #4ade80);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
