@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
       {/* Navigation Bar */}
       <nav className="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
-          <div style={{ fontSize: '30px' }} className="text-xl font-bold">IMAlearn</div>
+          <div style={{ fontSize: '30px', fontFamily: 'serif' }} className="text-xl font-bold">IMAlearn</div>
           <div className="space-x-4">
             <Link href="/signup" style={{ fontSize: '12px' }} className="hover:underline">
               Sign Up
