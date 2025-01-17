@@ -1,4 +1,4 @@
-// dari kodingan dibawah ini, saya ingin mengubah ukuran teks navbar yaitu sign up, login, courses, dan my favorites
+// dari kodingan dibawah ini, saya ingin mengubah ukuran teks navbar yaitu Imalern menjadi 20px
 
 import Link from 'next/link';
 import '../styles/globals.css';
