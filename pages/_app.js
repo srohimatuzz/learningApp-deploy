@@ -9,19 +9,19 @@ function MyApp({ Component, pageProps }) {
       {/* Navigation Bar */}
       <nav className="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-xl font-bold">Imalearn</div>
+          <div style={{ fontSize: '30px' }} className="text-xl font-bold">Imalearn</div>
           <div className="space-x-4">
-            <Link href="/signup" style={{ fontSize: '10px' }} className="hover:underline">
+            <Link href="/signup" style={{ fontSize: '11px' }} className="hover:underline">
               Sign Up
             </Link>
-            <Link href="/login" style={{ fontSize: '10px' }} className="hover:underline">
+            <Link href="/login" style={{ fontSize: '11px' }} className="hover:underline">
               Login
             </Link>
-            <Link href="/courses" style={{ fontSize: '10px' }} className="hover:underline">
+            <Link href="/courses" style={{ fontSize: '11px' }} className="hover:underline">
               Courses
             </Link>
             {/* Menambahkan link untuk halaman My Favorites */}
-            <Link href="/myFavorites" style={{ fontSize: '10px' }} className="hover:underline">
+            <Link href="/myFavorites" style={{ fontSize: '11px' }} className="hover:underline">
               My Favorites
             </Link>
           </div>
