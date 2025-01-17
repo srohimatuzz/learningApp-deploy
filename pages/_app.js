@@ -1,3 +1,5 @@
+// dari kodingan dibawah ini, saya ingin mengubah ukuran teks navbar yaitu sign up, login, courses, dan my favorites
+
 import Link from 'next/link';
 import '../styles/globals.css';
 
@@ -7,19 +9,19 @@ function MyApp({ Component, pageProps }) {
       {/* Navigation Bar */}
       <nav className="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-xl font-bold">My Learning App</div>
+          <div className="text-xl font-bold">Imalearn</div>
           <div className="space-x-4">
-            <Link href="/signup" className="hover:underline">
+            <Link href="/signup" style={{ fontSize: '10px' }} className="hover:underline">
               Sign Up
             </Link>
-            <Link href="/login" className="hover:underline">
+            <Link href="/login" style={{ fontSize: '10px' }} className="hover:underline">
               Login
             </Link>
-            <Link href="/courses" className="hover:underline">
+            <Link href="/courses" style={{ fontSize: '10px' }} className="hover:underline">
               Courses
             </Link>
             {/* Menambahkan link untuk halaman My Favorites */}
-            <Link href="/myFavorites" className="hover:underline">
+            <Link href="/myFavorites" style={{ fontSize: '10px' }} className="hover:underline">
               My Favorites
             </Link>
           </div>
