@@ -5,7 +5,7 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-400 to-green-600 flex flex-col items-center justify-center text-white">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-extrabold drop-shadow-lg">
-          Welcome to IMAlearn
+          Welcome to learnMe
         </h1>
         <p className="text-lg text-gray-200">
           Explore and connect with modern learning tools!
