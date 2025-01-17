@@ -1,4 +1,4 @@
-// dari kodingan dibawah ini, saya ingin mengubah ukuran teks navbar yaitu Imalern menjadi 20px
+// dari kodingan dibawah ini, saya ingin mengubah font teks IMAlearn menjadi font serif
 
 import Link from 'next/link';
 import '../styles/globals.css';
