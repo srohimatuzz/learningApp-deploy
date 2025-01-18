@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from 'react';
+import { supabase } from './supabaseClient';
 
 const MyFavorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -8,6 +10,22 @@ const MyFavorites = () => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     setFavorites(savedFavorites);
   }, []);
+
+  const handleAddFavoriteToSupabase = async (course) => {
+    try {
+      const { data, error } = await supabase
+        .from('myfavorites') // Nama tabel di Supabase
+        .insert([{ id: course.id, title: course.title, description: course.description }]);
+
+      if (error) {
+        console.error('Error menyimpan ke Supabase:', error.message);
+      } else {
+        console.log('Berhasil disimpan ke Supabase:', data);
+      }
+    } catch (err) {
+      console.error('Kesalahan saat menyimpan ke Supabase:', err.message);
+    }
+  };
 
   const handleRemoveFavorite = (id) => {
     // Menghapus kursus dari daftar favorit
