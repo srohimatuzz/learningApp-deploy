@@ -336,7 +336,7 @@ const Courses = () => {
             >
               <div className="relative">
                 <img
-                  src={course.imageUrl}
+                  src={course.imageUrl || '/default-course-image.jpg'}
                   alt={course.title}
                   className="w-full h-48 object-cover transition-all duration-500 ease-in-out"
                 />
