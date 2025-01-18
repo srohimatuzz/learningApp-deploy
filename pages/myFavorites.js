@@ -1,31 +1,45 @@
 
 import { useEffect, useState } from 'react';
-import { supabase } from './supabaseClient';
+import { supabase } from '../lib/supabase';
 
 const MyFavorites = () => {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    // Mengambil data kursus favorit dari localStorage
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setFavorites(savedFavorites);
+    // Ambil kursus favorit dari Supabase
+    const fetchFavorites = async () => {
+      const { data, error } = await supabase.from('myfavorites').select('*');
+      if (error) {
+        console.error('Error fetching favorites:', error.message);
+      } else {
+        setFavorites(data);
+      }
+    };
+
+    fetchFavorites();
   }, []);
 
-  const handleAddFavoriteToSupabase = async (course) => {
-    try {
-      const { data, error } = await supabase
-        .from('myfavorites') // Nama tabel di Supabase
-        .insert([{ id: course.id, title: course.title, description: course.description }]);
+  // useEffect(() => {
+  //   // Mengambil data kursus favorit dari localStorage
+  //   const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  //   setFavorites(savedFavorites);
+  // }, []);
 
-      if (error) {
-        console.error('Error menyimpan ke Supabase:', error.message);
-      } else {
-        console.log('Berhasil disimpan ke Supabase:', data);
-      }
-    } catch (err) {
-      console.error('Kesalahan saat menyimpan ke Supabase:', err.message);
-    }
-  };
+  // const handleAddFavoriteToSupabase = async (course) => {
+  //   try {
+  //     const { data, error } = await supabase
+  //       .from('myfavorites') // Nama tabel di Supabase
+  //       .insert([{ id: course.id, title: course.title, description: course.description }]);
+
+  //     if (error) {
+  //       console.error('Error menyimpan ke Supabase:', error.message);
+  //     } else {
+  //       console.log('Berhasil disimpan ke Supabase:', data);
+  //     }
+  //   } catch (err) {
+  //     console.error('Kesalahan saat menyimpan ke Supabase:', err.message);
+  //   }
+  // };
 
   const handleRemoveFavorite = (id) => {
     // Menghapus kursus dari daftar favorit

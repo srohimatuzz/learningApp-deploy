@@ -11,6 +11,41 @@ const Courses = () => {
   const [favorites, setFavorites] = useState([]);
   const [isFavoriteAdded, setIsFavoriteAdded] = useState(false);
 
+// // Fungsi untuk menambahkan kursus ke favorit di Supabase
+// const handleAddFavoriteToSupabase = async (course) => {
+//   try {
+//     const { error } = await supabase
+//       .from('favorites')
+//       .insert([{ course_id: course.id, title: course.title }]);
+
+//     if (error) {
+//       console.error('Error adding favorite to Supabase:', error.message);
+//     } else {
+//       console.log(`Kursus "${course.title}" berhasil ditambahkan ke Supabase.`);
+//     }
+//   } catch (err) {
+//     console.error('Unexpected error:', err);
+//   }
+// };
+
+
+  // Fungsi untuk menambahkan ke favorit di Supabase
+  const handleAddFavoriteToSupabase = async (course) => {
+    try {
+      const { data, error } = await supabase.from('myfavorites').insert([
+        { course_id: course.id, title: course.title, description: course.description }
+      ]);
+
+      if (error) {
+        console.error('Error adding favorite to Supabase:', error.message);
+      } else {
+        console.log('Course added to Supabase favorites:', data);
+      }
+    } catch (error) {
+      console.error('Unexpected error adding favorite to Supabase:', error);
+    }
+  };
+
   // Fetch courses from the database
   const fetchCourses = async () => {
     setLoading(true);
@@ -202,6 +237,42 @@ const Courses = () => {
     setIsModalOpen(true);
   };
 
+  // const handleAddToFavorites = async (course) => {
+  //   if (!favorites.some((fav) => fav.id === course.id)) {
+  //     const updatedFavorites = [...favorites, course];
+  //     setFavorites(updatedFavorites);
+  
+  //     // Simpan ke Local Storage
+  //     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  
+  //     // Simpan ke tabel `myfavorites` di Supabase
+  //     try {
+  //       const { data, error } = await supabase
+  //         .from('myfavorites') // Nama tabel di Supabase
+  //         .insert([{ 
+  //           course_id: course.id, // Id kursus
+  //           title: course.title, // Judul kursus
+  //           description: course.description || '', // Deskripsi kursus (jika ada)
+  //           created_at: new Date().toISOString(), // Tanggal dibuat
+  //         }]);
+  
+  //       if (error) {
+  //         console.error('Gagal menyimpan ke Supabase:', error.message);
+  //       } else {
+  //         console.log('Berhasil menambahkan ke Supabase:', data);
+  //       }
+  //     } catch (err) {
+  //       console.error('Kesalahan tidak terduga saat menyimpan ke Supabase:', err);
+  //     }
+  
+  //     // Tampilkan notifikasi
+  //     setIsFavoriteAdded(true);
+  //     setTimeout(() => setIsFavoriteAdded(false), 2000);
+  //     console.log(`Menambahkan kursus "${course.title}" ke favorit.`);
+  //   }
+  // };
+  
+
   const handleAddToFavorites = (course) => {
     if (!favorites.some((fav) => fav.id === course.id)) {
       const updatedFavorites = [...favorites, course];
@@ -209,11 +280,34 @@ const Courses = () => {
 
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
+      handleAddFavoriteToSupabase(course);
+
       setIsFavoriteAdded(true);
       setTimeout(() => setIsFavoriteAdded(false), 2000);
       console.log(`Menambahkan kursus "${course.title}" ke favorit.`);
     }
   };
+
+
+  useEffect(() => {
+    // Ambil kursus dari database dan simpan ke state
+    const fetchCourses = async () => {
+      setLoading(true);
+      const { data, error } = await supabase.from('courses').select('*');
+      if (error) {
+        console.error('Error fetching courses:', error.message);
+      } else {
+        setCourses(data);
+      }
+      setLoading(false);
+    };
+
+    fetchCourses();
+
+    // Ambil favorit dari localStorage
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(savedFavorites);
+  }, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -242,7 +336,7 @@ const Courses = () => {
             >
               <div className="relative">
                 <img
-                  src={course.imageUrl || '/default-course-image.jpg'}
+                  src={course.imageUrl}
                   alt={course.title}
                   className="w-full h-48 object-cover transition-all duration-500 ease-in-out"
                 />
